@@ -24,7 +24,7 @@ namespace WebApp {
             services.AddDbContext<DataContext>(opts => {
                 opts.UseSqlServer(Configuration[
                     "ConnectionStrings:ProductConnection"]);
-                opts.EnableSensitiveDataLogging(true);
+                // opts.EnableSensitiveDataLogging(true);
             });
             services.AddControllers();
         }
