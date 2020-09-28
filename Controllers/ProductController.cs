@@ -4,6 +4,7 @@ using WebApp.Models;
 using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace WebApp.Controllers
 {
@@ -24,6 +25,8 @@ namespace WebApp.Controllers
     }
 
     [HttpGet("{id}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetProduct(long id)
     {
       Product p = await context.Products.FindAsync(id);
@@ -31,14 +34,14 @@ namespace WebApp.Controllers
       {
         return NotFound();
       }
-      /* return Ok(new {
+      return Ok(new {
         ProductId = p.ProductId,
         Name = p.Name,
         Price = p.Price,
         CategoryId = p.CategoryId,
         SupplierId = p.SupplierId
-      }); */
-      return Ok(p);
+      });
+      // return Ok(p);
     }
 
     [HttpPost]
